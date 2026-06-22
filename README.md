@@ -1,5 +1,5 @@
 # Bismillah-Shop
 
-This is my repository for cloth shop project. 
+This is my repository for GS shop project. 
 <br>
 Author: "Qammar Hussain"
