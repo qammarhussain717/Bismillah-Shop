@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bismillah General Store – Quality & Trust</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><linearGradient id='grad1' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%237B0A28;stop-opacity:1' /><stop offset='50%' style='stop-color:%23C0143C;stop-opacity:1' /><stop offset='100%' style='stop-color:%23E8315B;stop-opacity:1' /></linearGradient><filter id='shadow'><feDropShadow dx='2' dy='2' stdDeviation='3' flood-opacity='0.3'/></filter></defs><rect width='200' height='200' fill='url(%23grad1)'/><circle cx='100' cy='100' r='95' fill='none' stroke='%23D4A843' stroke-width='3' opacity='0.6'/><circle cx='100' cy='100' r='85' fill='%23FDE8EE' opacity='0.1'/><text x='100' y='75' font-family='Georgia, serif' font-size='56' font-weight='bold' fill='%23FFFFFF' text-anchor='middle' filter='url(%23shadow)'>ب</text><text x='100' y='130' font-family='Arial, sans-serif' font-size='24' font-weight='600' fill='%23D4A843' text-anchor='middle' letter-spacing='2'>BISMILLAH</text><circle cx='100' cy='100' r='95' fill='none' stroke='%23FFFFFF' stroke-width='2' opacity='0.3'/></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --crimson:    #C0143C;
+      --rose:       #E8315B;
+      --blush:      #F7A8BA;
+      --deep:       #7B0A28;
+      --soft-pink:  #FDE8EE;
+      --white:      #FFFFFF;
+      --text-dark:  #1A0610;
+      --text-mid:   #5A2035;
+      --gold:       #D4A843;
+      --shadow:     rgba(120,10,40,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--soft-pink);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER / NAV ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: linear-gradient(135deg, var(--deep) 0%, var(--crimson) 60%, var(--rose) 100%);
+      box-shadow: 0 3px 20px var(--shadow);
+    }
+
+    nav {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 68px;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 12px; text-decoration: none;
+    }
+    .logo-icon {
+      min-width: 56px; min-height: 56px; width: auto; height: auto;
+      padding: 8px 10px; border-radius: 16px;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.68rem; font-weight: 900; color: var(--deep);
+      font-family: 'Playfair Display', serif;
+      line-height: 1.2; text-align: center;
+      flex-shrink: 0;
+    }
+    .logo-text { line-height: 1.2; }
+    .logo-text span:first-child {
+      display: block; font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 700; color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .logo-text span:last-child {
+      display: block; font-size: 0.72rem; color: var(--blush);
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex; gap: 6px; list-style: none;
+    }
+    .nav-links a {
+      display: block; padding: 8px 16px; border-radius: 6px;
+      text-decoration: none; color: var(--white);
+      font-size: 0.88rem; font-weight: 500; letter-spacing: 0.03em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      background: rgba(255,255,255,0.18);
+    }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 26px; height: 2.5px;
+      background: var(--white); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ── MOBILE NAV ── */
+    .mobile-menu {
+      display: none; position: fixed; top: 68px; left: 0; right: 0;
+      background: var(--deep); padding: 16px 24px; z-index: 99;
+      box-shadow: 0 8px 24px var(--shadow);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block; padding: 12px 0; color: var(--white);
+      text-decoration: none; font-size: 1rem; font-weight: 500;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--blush); }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      background: linear-gradient(145deg, var(--deep) 0%, var(--crimson) 45%, var(--rose) 75%, var(--blush) 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 120px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+    #home::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block; background: var(--gold);
+      color: var(--deep); font-size: 0.75rem; font-weight: 600;
+      padding: 5px 16px; border-radius: 20px; letter-spacing: 0.06em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 900;
+      color: var(--white); line-height: 1.12; margin-bottom: 8px;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.3);
+    }
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2.5vw, 1.5rem); color: var(--blush);
+      margin-bottom: 20px; font-weight: 700; letter-spacing: 0.04em;
+    }
+    .hero-desc {
+      max-width: 560px; font-size: 1rem; color: rgba(255,255,255,0.82);
+      line-height: 1.7; margin-bottom: 40px;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      padding: 13px 30px; border-radius: 8px; font-size: 0.9rem;
+      font-weight: 600; text-decoration: none; cursor: pointer;
+      border: none; transition: all 0.25s; letter-spacing: 0.03em;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-white {
+      background: var(--white); color: var(--crimson);
+    }
+    .btn-white:hover { background: var(--soft-pink); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border: 2px solid rgba(255,255,255,0.5);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+
+    /* hero image strip */
+    .hero-images {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: minmax(260px, 420px) minmax(220px, 1fr);
+      gap: 18px;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-image-main img {
+      width: 100%; height: 100%; min-height: 380px;
+      object-fit: cover; border-radius: 20px;
+      border: 4px solid rgba(255,255,255,0.45);
+      box-shadow: 0 18px 46px rgba(0,0,0,0.28);
+      transition: transform 0.35s, box-shadow 0.35s;
+    }
+    .hero-image-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(140px, 1fr));
+      gap: 16px;
+    }
+    .hero-image-grid img {
+      width: 100%; aspect-ratio: 4 / 3;
+      object-fit: cover; border-radius: 16px;
+      border: 3px solid rgba(255,255,255,0.3);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .hero-image-main img:hover,
+    .hero-image-grid img:hover { transform: translateY(-6px) scale(1.04); box-shadow: 0 18px 38px rgba(0,0,0,0.35); }
+    .hero-note {
+      margin-top: 18px; font-size: 0.95rem;
+      color: rgba(255,255,255,0.86); max-width: 520px;
+      line-height: 1.7;
+    }
+
+    /* ── SECTION BASE ── */
+    section { scroll-margin-top: 68px; }
+
+    .section-wrap { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
+
+    .section-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--rose); margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+      color: var(--deep); margin-bottom: 16px; line-height: 1.2;
+    }
+    .section-line {
+      width: 56px; height: 4px;
+      background: linear-gradient(to right, var(--crimson), var(--rose));
+      border-radius: 2px; margin-bottom: 40px;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--white); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .service-card {
+      background: var(--soft-pink);
+      border: 1.5px solid rgba(192,20,60,0.1);
+      border-radius: 14px; padding: 28px 24px;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px var(--shadow);
+      border-color: var(--rose);
+    }
+    .service-icon {
+      width: 52px; height: 52px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--crimson), var(--rose));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 16px;
+    }
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--deep); margin-bottom: 8px;
+    }
+    .service-card p {
+      font-size: 0.88rem; color: var(--text-mid); line-height: 1.65;
+    }
+
+    /* services gallery */
+    .services-gallery {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .gallery-item {
+      position: relative; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 4px 16px var(--shadow);
+      aspect-ratio: 4/3;
+    }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .gallery-item:hover img { transform: scale(1.07); }
+    .gallery-item .gallery-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(120,10,40,0.85));
+      color: var(--white); font-size: 0.8rem; font-weight: 600;
+      padding: 24px 12px 10px; text-align: center;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: linear-gradient(135deg, var(--soft-pink) 0%, #fce4ec 100%);
+    }
+
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+    }
+    .about-text p {
+      font-size: 0.95rem; color: var(--text-mid); line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .owner-card {
+      background: var(--white); border-radius: 20px;
+      padding: 40px 32px; text-align: center;
+      box-shadow: 0 12px 40px var(--shadow);
+      position: relative;
+    }
+    .owner-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 6px;
+      background: linear-gradient(to right, var(--crimson), var(--rose));
+      border-radius: 20px 20px 0 0;
+    }
+
+    /* Photo upload area */
+    .photo-upload-area {
+      width: 160px; height: 160px; border-radius: 50%;
+      margin: 0 auto 20px; position: relative; cursor: pointer;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.75), rgba(255,255,255,0) 35%),
+                  linear-gradient(135deg, rgba(247,168,186,0.22), rgba(253,232,238,0.95));
+      border: 4px solid rgba(255,255,255,0.8);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      box-shadow: 0 18px 40px rgba(120,10,40,0.18);
+    }
+    .photo-upload-area:hover { border-color: rgba(192,20,60,0.9); box-shadow: 0 22px 48px rgba(120,10,40,0.24); transform: translateY(-2px); }
+    .photo-upload-area img#ownerPhoto {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      border-radius: 50%;
+    }
+
+    .owner-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700; color: var(--deep); margin-bottom: 4px;
+    }
+    .owner-role {
+      font-size: 0.82rem; color: var(--rose); font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .owner-bio {
+      font-size: 0.85rem; color: var(--text-mid); line-height: 1.7;
+    }
+    .owner-divider {
+      width: 40px; height: 3px;
+      background: linear-gradient(to right, var(--crimson), var(--rose));
+      border-radius: 2px; margin: 14px auto;
+    }
+
+    .stats-row {
+      display: flex; gap: 24px; margin-top: 32px; flex-wrap: wrap;
+    }
+    .stat { flex: 1; min-width: 80px; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; font-weight: 900; color: var(--crimson); line-height: 1;
+    }
+    .stat-lbl { font-size: 0.75rem; color: var(--text-mid); margin-top: 4px; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--white); }
+
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
+    }
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; color: var(--deep); margin-bottom: 24px;
+    }
+    .contact-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      margin-bottom: 20px; padding: 18px; border-radius: 12px;
+      background: var(--soft-pink); border: 1px solid rgba(192,20,60,0.1);
+    }
+    .contact-icon {
+      width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--crimson), var(--rose));
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .contact-item-text strong { display: block; color: var(--deep); font-size: 0.88rem; margin-bottom: 3px; }
+    .contact-item-text span, .contact-item-text a {
+      color: var(--text-mid); font-size: 0.85rem; text-decoration: none;
+    }
+    .contact-item-text a:hover { color: var(--crimson); }
+
+    /* WhatsApp CTA */
+    .whatsapp-cta {
+      display: flex; align-items: center; gap: 14px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: var(--white); padding: 20px 24px;
+      border-radius: 14px; text-decoration: none;
+      font-weight: 600; font-size: 1rem;
+      box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+      transition: transform 0.25s, box-shadow 0.25s;
+      margin-top: 24px;
+    }
+    .whatsapp-cta:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(37,211,102,0.45); }
+    .whatsapp-cta .wa-icon { font-size: 28px; }
+    .whatsapp-cta .wa-text { line-height: 1.3; }
+    .whatsapp-cta .wa-text small { display: block; font-size: 0.78rem; font-weight: 400; opacity: 0.9; }
+
+    /* map placeholder */
+    .map-box {
+      border-radius: 16px; overflow: hidden;
+      background: var(--soft-pink); height: 280px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      border: 2px dashed rgba(192,20,60,0.2);
+      text-align: center; padding: 24px;
+      color: var(--text-mid);
+    }
+    .map-box span { font-size: 48px; margin-bottom: 12px; }
+    .map-box p { font-size: 0.88rem; line-height: 1.6; }
+    .map-box strong { color: var(--deep); display: block; font-size: 1rem; margin-bottom: 6px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: linear-gradient(135deg, var(--deep), var(--crimson));
+      color: rgba(255,255,255,0.85); text-align: center;
+      padding: 40px 24px;
+    }
+    footer .foot-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 700; color: var(--white);
+      margin-bottom: 8px;
+    }
+    footer p { font-size: 0.82rem; line-height: 1.7; }
+    footer .foot-divider {
+      width: 50px; height: 3px;
+      background: var(--gold);
+      border-radius: 2px; margin: 16px auto;
+    }
+    footer .foot-credits { font-size: 0.78rem; opacity: 0.65; margin-top: 12px; }
+
+    /* ── SCROLL TO TOP ── */
+    #scrollTop {
+      position: fixed; bottom: 28px; right: 28px; z-index: 200;
+      width: 46px; height: 46px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--crimson), var(--rose));
+      color: var(--white); font-size: 20px;
+      border: none; cursor: pointer;
+      box-shadow: 0 4px 16px var(--shadow);
+      display: none; align-items: center; justify-content: center;
+      transition: transform 0.2s, opacity 0.3s;
+    }
+    #scrollTop:hover { transform: scale(1.1); }
+    #scrollTop.visible { display: flex; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-text { order: 2; }
+      .owner-card { order: 1; }
+      .stats-row { gap: 16px; }
+      .hero-images img { width: 140px; height: 100px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .contact-form { padding: 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .services-gallery { grid-template-columns: 1fr; }
+      .section-wrap { padding: 60px 16px; }
+      .hero-images { gap: 12px; }
+      .btn { font-size: 0.85rem; padding: 11px 24px; }
+      .testimonial-card { padding: 20px 16px; }
+      .contact-form { padding: 20px; }
+    }
+
+    @media (max-width: 768px) {
+      [style*="display: grid; grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* ── ANIMATION ── */
+    .fade-up {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials {
+      background: linear-gradient(135deg, var(--soft-pink) 0%, #fce4ec 100%);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px 24px;
+      box-shadow: 0 8px 24px var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-left: 4px solid var(--crimson);
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 36px rgba(192,20,60,0.2);
+    }
+
+    .testimonial-stars {
+      color: var(--gold);
+      font-size: 1rem;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 18px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--crimson), var(--rose));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    .testimonial-name {
+      font-family: 'Playfair Display', serif;
+      color: var(--deep);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .testimonial-role {
+      font-size: 0.75rem;
+      color: var(--rose);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    /* ── CONTACT FORM ── */
+    .contact-form {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 8px 24px var(--shadow);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      color: var(--deep);
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid rgba(192,20,60,0.15);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--crimson);
+      box-shadow: 0 0 0 3px rgba(192,20,60,0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-submit {
+      background: linear-gradient(135deg, var(--crimson), var(--rose));
+      color: var(--white);
+      padding: 14px 32px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(192,20,60,0.3);
+    }
+
+    .form-submit:active {
+      transform: translateY(0);
+    }
+
+    .form-message {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      display: none;
+      font-size: 0.9rem;
+    }
+
+    .form-message.success {
+      background: #E8F5E9;
+      color: #2E7D32;
+      display: block;
+    }
+
+    .form-message.error {
+      background: #FFEBEE;
+      color: #C62828;
+      display: block;
+    }
+
+    /* ── ENHANCED INTERACTIONS ── */
+    .service-card:nth-child(1) { transition-delay: 0.05s; }
+    .service-card:nth-child(2) { transition-delay: 0.1s; }
+    .service-card:nth-child(3) { transition-delay: 0.15s; }
+    .service-card:nth-child(4) { transition-delay: 0.2s; }
+    .service-card:nth-child(5) { transition-delay: 0.25s; }
+    .service-card:nth-child(6) { transition-delay: 0.3s; }
+
+    .hero-images img {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    }
+
+    /* Loading state */
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* ── IMPROVED SPACING ── */
+    .section-wrap { padding: 80px 24px; }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Scroll reveal animation */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <nav>
+    <a href="#home" class="logo">
+      <div class="logo-icon">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <div class="logo-text">
+        <span>Bismillah G.S</span>
+        <span>Premium Quality Store</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMobile()">🏠 Home</a>
+  <a href="#services" onclick="closeMobile()">🛍️ Services</a>
+  <a href="#about" onclick="closeMobile()">👤 About Us</a>
+  <a href="#testimonials" onclick="closeMobile()">⭐ Reviews</a>
+  <a href="#contact" onclick="closeMobile()">📞 Contact Us</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="home">
+  <div class="hero-badge">✨ Welcome to Our Store</div>
+  <h1 class="hero-title">Bismillah General Store</h1>
+  <p class="hero-sub">Your One-Stop Quality Store</p>
+  <p class="hero-desc">
+    Everything you need for daily life and premium readymade garments — all in one place. 
+    Quality products, honest prices, and heartfelt service. 
+    Make your shopping experience with us unforgettable!
+  </p>
+  <div class="hero-btns">
+    <a href="#services" class="btn btn-white">🛍️ Explore Our Services</a>
+    <a href="https://wa.me/923062026323" target="_blank" class="btn btn-outline">💬 Message on WhatsApp</a>
+  </div>
+  <p class="hero-note">Explore our premium rings collection alongside everyday essentials, garments, and home products. Shop with confidence and discover beautiful pieces made for every occasion.</p>
+
+  <div class="hero-images">
+    <div class="hero-image-main"> 
+      <img src="./images/WhatsApp Image 2026-06-20 at 11.20.26 PM (3).jpeg" alt="Featured Ring Collection" />
+    </div>
+    <div class="hero-image-grid">
+      <img src="./images/WhatsApp Image 2026-06-20 at 11.20.48 PM (1).jpeg" alt="Rings Collection" />
+      <img src="./images/WhatsApp Image 2026-06-21 at 4.24.07 AM.jpeg" alt="Garments" />
+      <img src="./images/WhatsApp Image 2026-06-20 at 11.20.26 PM (1).jpeg" alt="Shopping" />
+      <img src="./images/WhatsApp Image 2026-06-20 at 11.20.26 PM (2).jpeg" alt="Clothes" />
+      <img src="./images/WhatsApp Image 2026-06-20 at 11.21.41 PM.jpeg" alt="Earings" />
+      <img src="./images/WhatsApp Image 2026-06-21 at 4.00.27 AM.jpeg" alt="Bangles" />
+      <img src="./images/WhatsApp Image 2026-06-21 at 4.24.08 AM.jpeg" alt="Toys" />
+      <img src="./images/WhatsApp Image 2026-06-21 at 4.24.07 AM (1).jpeg" alt="Poni" />
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services">
+  <div class="section-wrap">
+    <p class="section-label fade-up">What We Offer</p>
+    <h2 class="section-title fade-up">Our Services</h2>
+    <div class="section-line fade-up"></div>
+
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">🏪</div>
+        <h3>General Store Items</h3>
+        <p>All your daily essentials — groceries, household items, snacks, beverages, and everything you need. Always fresh and quality assured.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">👗</div>
+        <h3>Readymade Garments</h3>
+        <p>Premium quality clothing for men, women, and children. We cater to every season's needs. Latest designs with superior quality materials at affordable prices.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🧴</div>
+        <h3>Cosmetics & Beauty</h3>
+        <p>Genuine cosmetics, skincare, and beauty products you can trust. We stock top brands at affordable prices with quality guarantee.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🧺</div>
+        <h3>Household Items</h3>
+        <p>From daily household essentials to professional cleaning products — everything under one roof. Save both time and money shopping with us.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🎁</div>
+        <h3>Gift Items</h3>
+        <p>Beautiful gift items with premium packaging for special occasions. Delight your loved ones with thoughtful gifts from our collection.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">⚡</div>
+        <h3>Home Delivery</h3>
+        <p>We offer convenient home delivery in our service area. Order via WhatsApp and receive your items at home. Fast, reliable & hassle-free!</p>
+      </div>
+    </div>
+
+    <!-- Gallery -->
+    <div class="services-gallery fade-up" style="margin-top:48px;">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1671644730555-916aa8d8157f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGVhcnJpbmdzfGVufDB8fDB8fHww" alt="Earrings" />
+        <div class="gallery-label">Earrings</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://media.istockphoto.com/id/1223639966/photo/beautiful-colorful-bangles-at-katra-main-market-of-jammu.webp?a=1&b=1&s=612x612&w=0&k=20&c=WVx70vCiMy6JgdtnGD1L-P1x-ez2Zod9VXaIehszOys=" alt="Ladies Garments" />
+        <div class="gallery-label">Kashmiri Bangles</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1599708978061-501091150ec9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGxhZGllcyUyMHJpbmdzfGVufDB8fDB8fHww" alt="Ladies Rings" />
+        <div class="gallery-label">Ladies Rings</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dG95c3xlbnwwfHwwfHx8MA%3D%3D" alt="Kids Wear" />
+        <div class="gallery-label">Toys</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1611107683227-e9060eccd846?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFuZ2xlcyUyMGFuZCUyMGJyYWNlbGV0fGVufDB8fDB8fHww" alt="Bangles" />
+        <div class="gallery-label">Bangles & Bracelets</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1560859259-fcf2b952aed8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNoaWxkJTIwY2xvdGhlc3xlbnwwfHwwfHx8MA%3D%3D" alt="Readymade Garments" />
+        <div class="gallery-label">Ready-Made Garments</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://plus.unsplash.com/premium_photo-1663127554127-1f2fd7682180?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Z2lmdHN8ZW58MHx8MHx8fDA%3D" alt="Gifts" />
+        <div class="gallery-label">Gifts</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://media.istockphoto.com/id/1053404290/photo/jewelery-showcase-jewelery-store-window.webp?a=1&b=1&s=612x612&w=0&k=20&c=4m3ffURyBjRVa6bofcOtL5jYwwUs7d7A9NQOHgs5wwE=" alt="Jewellery" />
+        <div class="gallery-label">Jewellery Collection</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="section-wrap">
+    <p class="section-label fade-up">Our Story</p>
+    <h2 class="section-title fade-up">About Our Store</h2>
+    <div class="section-line fade-up"></div>
+
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <p>
+          <strong style="color:var(--deep)">Bismillah General Store</strong> has been serving the community with integrity and dedication for over a decade. Our store is a one-stop destination where you can find all your daily necessities and premium products under one roof.
+        </p>
+        <p>
+          Our founder <strong style="color:var(--crimson)">Qammar Hussain</strong> established this store with a simple yet powerful vision — every customer is family, and they deserve the best in quality, trust, and respectful service.
+        </p>
+        <p>
+          We specialize in the latest fashion trends with affordable readymade garments for men, women, and children. We maintain the highest standards of quality in our clothing collection to ensure you're always satisfied.
+        </p>
+        <p>
+          Visit our store and experience the difference that genuine, honest, and trustworthy service makes. We're proud to serve you with the values of integrity and excellence!
+        </p>
+
+        <div class="stats-row">
+          <div class="stat">
+            <div class="stat-num">20+</div>
+            <div class="stat-lbl">Years of Trust</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">5000+</div>
+            <div class="stat-lbl">Happy Customers</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">500+</div>
+            <div class="stat-lbl">Products</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="owner-card fade-up">
+        <!-- Photo upload -->
+        <div class="photo-upload-area">
+          <img id="ownerPhoto" alt="Owner Photo" src="/QammarPic.jpg" />
+        </div>
+
+        <div class="owner-name">Qammar Hussain</div>
+        <div class="owner-role">Founder & Owner</div>
+        <div class="owner-divider"></div>
+        <p class="owner-bio">
+          Qammar Hussain, the founder and owner of Bismillah General Store, has built this enterprise with dedication and hard work. His mission has always been to provide excellent service and quality products to every customer.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials">
+  <div class="section-wrap">
+    <p class="section-label fade-up">Customer Reviews</p>
+    <h2 class="section-title fade-up">What Our Customers Say</h2>
+    <div class="section-line fade-up"></div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">
+          "You can find everything at Bismillah General Store! Excellent quality at great prices. The service is outstanding!"
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">ف</div>
+          <div>
+            <div class="testimonial-name">Fatima Khan</div>
+            <div class="testimonial-role">Local Customer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">
+          "The readymade garment collection is absolutely amazing! All sizes and designs are excellent. I ordered from home and delivery arrived right on time!"
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">ا</div>
+          <div>
+            <div class="testimonial-name">Aisha Malik</div>
+            <div class="testimonial-role">Regular Shopper</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">
+          "There's no better store in the area. From groceries to cosmetics — everything is quality and affordable. You can trust them completely!"
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">ع</div>
+          <div>
+            <div class="testimonial-name">Ahmed Hassan</div>
+            <div class="testimonial-role">Everyday Visitor</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">
+          "Children's clothes and toys are all excellent quality. My daughter loved all the outfits. I'll definitely shop there again next time!"
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">ح</div>
+          <div>
+            <div class="testimonial-name">Hira Nawaz</div>
+            <div class="testimonial-role">Customer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">
+          "Everything from business supplies to daily items is available. The WhatsApp ordering system is amazing — I placed an order from home!"
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">م</div>
+          <div>
+            <div class="testimonial-name">Mohammad Saeed</div>
+            <div class="testimonial-role">Shop Owner</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">
+          "I've been shopping here for 10 years. They never compromise on quality, and the owner has great respect throughout the community!"
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">ن</div>
+          <div>
+            <div class="testimonial-name">Nasir Ali</div>
+            <div class="testimonial-role">Long-time Customer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="section-wrap">
+    <p class="section-label fade-up">Get In Touch</p>
+    <h2 class="section-title fade-up">Contact Us</h2>
+    <div class="section-line fade-up"></div>
+
+    <div class="contact-grid">
+      <div class="contact-info fade-up">
+        <h3>We're Here for You!</h3>
+
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-text">
+            <strong>Our Location</strong>
+            <span>Bismillah General Store, Bhatta Road, Adda Jindoo Pir Kamal</span>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div class="contact-item-text">
+            <strong>Phone Number</strong>
+            <a href="tel:+923062026323">+92 306 2026323</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div class="contact-item-text">
+            <strong>Store Hours</strong>
+            <span>7:00 AM - 7:00 PM — Open 7 Days</span>
+          </div>
+        </div>
+
+        <a href="https://wa.me/923062026323?text=Hello!%20I%20want%20to%20contact%20Bismillah%20General%20Store." 
+           target="_blank" class="whatsapp-cta">
+          <span class="wa-icon">💬</span>
+          <div class="wa-text">
+            Message on WhatsApp
+            <small>Get direct support — +92 306 2026323</small>
+          </div>
+        </a>
+      </div>
+
+      <div class="fade-up">
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your name...">
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required placeholder="03XX-XXXXXXX">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="your.email@example.com">
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" required placeholder="What would you like to say?">
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="Type your message here..."></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">📤 Send Message</button>
+          <div class="form-message" id="formMessage"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Map and instructions -->
+    <div style="margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
+      <div class="fade-up">
+        <div class="map-box">
+          <span>🗺️</span>
+          <strong>Bismillah General Store</strong>
+          <p>Quality District<br>
+          Search on Google Maps<br>
+          <strong style="color:var(--rose)">"Bismillah General Store"</strong><br>
+          to find us easily and get directions.</p>
+        </div>
+      </div>
+
+      <div class="fade-up" style="background:var(--soft-pink); border-radius:14px; padding:24px; border:1px solid rgba(192,20,60,0.12);">
+        <h4 style="font-family:'Playfair Display',serif;color:var(--deep);margin-bottom:12px;font-size:1rem;">📦 How to Place an Order?</h4>
+        <ol style="padding-left:18px;color:var(--text-mid);font-size:0.85rem;line-height:2;">
+          <li>Click on the WhatsApp button</li>
+          <li>Type your order details</li>
+          <li>Confirm your delivery address</li>
+          <li>Choose delivery or pickup option</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="foot-logo">Bismillah General Store</div>
+  <p>Your Trusted Store for Quality & Value</p>
+  <div class="foot-divider"></div>
+  <p>Founded by: <strong style="color:var(--gold)">Qammar Hussain</strong></p>
+  <p style="margin-top:6px;">📱 <a href="https://wa.me/923062026323" style="color:var(--blush);text-decoration:none">+92 306 2026323</a></p>
+  <p class="foot-credits">© 2005 Bismillah General Store. All rights reserved.</p>
+</footer>
+
+<!-- Scroll to top -->
+<button id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  // ── Hamburger menu ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // ── Scroll to top ──
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 300);
+  });
+
+  // ── Fade-in on scroll ──
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { 
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // ── Active nav highlight ──
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // ── Contact Form Handling ──
+  const contactForm = document.getElementById('contactForm');
+  const formMessage = document.getElementById('formMessage');
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = {
+      name: document.getElementById('name').value,
+      phone: document.getElementById('phone').value,
+      email: document.getElementById('email').value,
+      subject: document.getElementById('subject').value,
+      message: document.getElementById('message').value
+    };
+
+    // Basic validation
+    if (!formData.name || !formData.phone || !formData.subject || !formData.message) {
+      showFormMessage('Please fill in all required fields', 'error');
+      return;
+    }
+
+    // Phone validation (basic)
+    if (!/^\d{10,12}$/.test(formData.phone.replace(/\D/g, ''))) {
+      showFormMessage('Please enter a valid phone number', 'error');
+      return;
+    }
+
+    // Disable submit button
+    const submitBtn = contactForm.querySelector('.form-submit');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = '⏳ Sending...';
+
+    try {
+      // Create WhatsApp message (since we don't have backend)
+      const whatsappMessage = `
+*${formData.name}* se naya message:
+📋 Subject: ${formData.subject}
+📱 Phone: ${formData.phone}
+${formData.email ? `📧 Email: ${formData.email}` : ''}
+
+💬 Message:
+${formData.message}
+      `.trim();
+
+      const encodedMessage = encodeURIComponent(whatsappMessage);
+      
+      // Send via WhatsApp
+      window.open(`https://wa.me/923062026323?text=${encodedMessage}`, '_blank');
+      
+      // Show success message
+      showFormMessage('✅ Message sent via WhatsApp! We will reply soon.', 'success');
+      
+      // Reset form
+      contactForm.reset();
+    } catch (error) {
+      showFormMessage('An error occurred. Please try again.', 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
+  });
+
+  function showFormMessage(message, type) {
+    formMessage.textContent = message;
+    formMessage.className = `form-message ${type}`;
+    setTimeout(() => {
+      formMessage.className = 'form-message';
+    }, 5000);
+  }
+
+  // ── Smooth scroll for anchor links ──
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        closeMobile();
+      }
+    });
+  });
+
+  // ── Add scroll animations for hero images ──
+  const heroImages = document.querySelectorAll('.hero-images img');
+  heroImages.forEach((img, index) => {
+    img.style.animationDelay = `${index * 0.1}s`;
+  });
+
+  // ── Improved performance - lazy load images ──
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          }
+          observer.unobserve(img);
+        }
+      });
+    });
+    document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
+  }
+</script>
+</body>
+</html>
